@@ -7,16 +7,95 @@
     <link rel="icon" href="favicon.ico">
 </head>
 <body>
+    <header>
+      <nav>
+        <h1>Meeting Minute Tracker</h1>
+        <hr>
+      </nav>
+    </header>
     <main>
-        <nav>
-            Meeting Minute Tracker
-        </nav>
-        <header>
-            <h1>Meeting Minute Tracker</h1>
-        </header>
-        <footer>
-            by Ryan Ding
-        </footer>
+      <section id="description">
+        <img src="./calendar.png" alt="calendar funny">
+        <p>Use this application to record important notes for upcoming meetings and to view key points from previous meetings!</p>
+      </section>
+      <section id="previous-meeting">
+        <details>
+          <summary><strong>Previous Meeting Information</strong></summary>
+          <h3>Weekly Standup</h3>
+          <h4>Saturday, April 20th, 2024, 16:20PM</h4>
+          <h3>Agenda</h3>
+          <ol>
+            <li>Introducing New Hires</li>
+            <li>Weekly Standup</li>
+            <ul>
+              <li>Ryan - Refactored code and added documentation</li>
+              <li>Steve - Laid off 50 people</li>
+              <li>John - Fixed minor bug, moving onto new issue</li>
+            </ul>
+            <li>Issuing new tasks</li>
+          </ol>
+          <h3>Action Items</h3>
+          <input type="checkbox">Start and finish issue
+          <input type="checkbox">Onboard new Hires
+          <input type="checkbox">Update packages
+          <h3>Meeting Recordings</h3>
+          <video src="./surfer.mp4" controls ></video>
+          <audio src="./title-cc.mp3" controls></audio>
+        </details>
+      </section>
+      <section id="new-meeting">
+        <h2>Fill in New Meeting Notes!</h2>
+        <form action="">
+          <fieldset>
+            <h2>Meeting Information</h2>
+            <div class="event-name">
+              <label for="event-name">Event Name:</label>
+              <input type="text">
+            </div>
+            <div class="event-time">
+              <label for="event-time">Date of Event:</label>
+              <input type="date">
+              <label for="all-day">All Day?</label>
+              <input type="checkbox">
+              <label for="time">Time:</label>
+              <input type="time">
+            </div>
+            <div class="location">
+              <label for="location">Where is this event held?</label>
+              <select name="event-location" id="location">
+                <option value=""></option>
+                <option value="in-person">In-Person</option>
+                <option value="virtual">Virtual</option>
+                <option value="hybrid">Hybrid</option>
+              </select>
+            </div>
+            <div class="host">
+              <label for="host">Who hosted this event?</label>
+              <input list="host">
+              <datalist id="host">
+                <option value="Ryan"></option>
+                <option value="Steve"></option>
+                <option value="John"></option>
+                <option value="James"></option>
+                <option value="Other"></option>
+              </datalist>
+            </div>
+          </fieldset>
+          <fieldset>
+            <h3>Meeting Notes</h3>
+            <textarea name="meeting-notes" id="" cols="30" rows="10"></textarea>
+            <div class="submission">
+              <label for="public">Make Meeting Notes Public?</label>
+              <input type="radio">Yes
+              <input type="radio">No
+              <button>Submit</button>
+            </div>
+          </fieldset>
+        </form>
+      </section>
     </main>
+    <footer>
+        by <a href="https://www.linkedin.com/in/ryand26/">Ryan Ding</a>
+    </footer>
 </body>
 </html>
