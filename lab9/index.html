@@ -6,7 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 9</title>
-
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "bb995bc2938e4549b777d25ea7df10de"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>               
   <style>
     button {
       margin: 3px;
@@ -88,6 +94,9 @@
   </main>
 
   <script>
+
+    TrackJS.track('Testing TrackJS!');
+
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -103,17 +112,64 @@
     // Start your code here
     // You may move this JS to another file if you wish
 
+    // This part is the Ajax TCR example, with modifications to throw a window.oneerror to console log instead of alert
+    /* object literal wrapper to avoid namespace conflicts */
+    var myErrorHandler= {}; 
+      
+    myErrorHandler.reportJSError = function (errorMessage,url,lineNumber)
+    { 
+        console.log("Erorr caught.  \nThis is my sample error handling message.");
+        return true; // suppress normal JS errors since we handled
+    }
+      
+    myErrorHandler.registerErrorHandler = function () 
+    {    
+        if (window.onerror) // then one exists
+          {
+            var oldError = window.onerror;
+            var newErrorHandler = function (errorMessage,url,lineNumber) { myErrorHandler.reportJSError(errorMessage,url,lineNumber); oldError(errorMessage,url,lineNumber); }
+            window.onerror = newErrorHandler;
+          }
+        else
+          window.onerror = myErrorHandler.reportJSError;
+    }
+      
+    /* bind the error handler */
+    myErrorHandler.registerErrorHandler();
+
+    // My original code
     function Class(name, number) {
       this.name = name;
       this.number = number;
     }
 
+    class CustomError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'Ryan\'s Error';
+      }
+    }
+
     errorBtns.forEach((btn, btnNum) => {
       btn.addEventListener("click", () => {
         if (btnNum == 0) {
-          console.log('Console Log Demo');
+          try {
+            let error = document.querySelector('this-dont-exist');
+            error.json();
+          } catch (err) {
+            console.log('This button is throwing an error', err);
+          } finally {
+            console.log('Also Working Console Log Demo (in finally statement)');
+          }
         } else if (btnNum == 1) {
-          console.error('Console Error Demo');
+          try {
+            console.error('Console Error Demo');
+            throw new CustomError('Throwing this on purpose in a try statement');
+          } catch (err) {
+            console.log(err.message);
+            console.log(err.name);
+            console.log(err.stack);
+          }
         } else if (btnNum == 2) {
           console.count('Count button');
         } else if (btnNum == 3) {
@@ -135,13 +191,14 @@
         } else if (btnNum == 10) {
           console.table([new Class('Software Engineering', 110), new Class('Programming Languages', 130), new Class('Advanced Software Engineering', 112)]);
         } else if (btnNum == 11) {
-          console.time();
+          console.time('Timer Button');
         } else if (btnNum == 12) {
           console.timeEnd('Timer Button');
         } else if (btnNum == 13) {
           console.trace();
         } else {
-          
+          console.log('This code below is part of my error handling:');
+          messUp(); 
         }
       });
     });
