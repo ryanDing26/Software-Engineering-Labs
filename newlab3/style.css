@@ -1,0 +1,22 @@
+* {
+    background-color: white;
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.main-item {
+
+}
+
+footer {
+    text-align: center;   
+}

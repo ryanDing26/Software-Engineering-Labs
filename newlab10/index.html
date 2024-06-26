@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PQ5F3JHB');</script>
+  <!-- End Google Tag Manager -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FV1TY9MC3Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+  gtag('config', 'G-FV1TY9MC3Q');
+</script>
+
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <title>Lab 10 - Return of the Party Horn</title>
+
+  <!-- JS Confetti -->
+  <script src="assets/scripts/js-confetti.browser.js"></script>
+
+  <!-- Main Stylesheet & Scripts -->
+  <link rel="stylesheet" href="assets/styles/global.css" />
+  <script src="assets/scripts/partyHorn.js" type="module"></script>
+  <script src="https://unpkg.com/launchdarkly-js-client-sdk@3"></script>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQ5F3JHB"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <header>
+    <nav>
+      <a href="speechSynth.html" title="Go to speech synthesizer">Speech Synthesizer</a>
+    </nav>
+  </header>
+  <main>
+    <section id="expose">
+      <header>
+        <h2>Return of the Party Horn</h2>
+      </header>
+      <img src="assets/images/no-image.png" alt="No image selected" />
+      <select name="horn" id="horn-select">
+        <option value="select" disabled selected>Select Horn:</option>
+        <option value="air-horn">Air Horn</option>
+        <option value="car-horn">Car Horn</option>
+        <option value="party-horn">Party Horn</option>
+      </select>
+      <div id="volume-controls">
+        <input type="range" name="volume" id="volume" value="50" min="0" max="100" step="1" />
+        <img src="assets/icons/volume-level-2.svg" alt="Volume level 2" />
+      </div>
+      <button>Play Sound</button>
+      <audio class="hidden" src=""></audio>
+    </section>
+  </main>
+
+  <script>
+    // Generate a random number between 0 and 1
+    const randomNumber = Math.random();
+    // Determine if the class should be applied
+    const shouldApplyClass = randomNumber < 0.5;
+    // Get the body element
+    let body = document.querySelector('body');
+    // Apply or remove the "blue" class based on the random number
+    if (shouldApplyClass) {
+         body.classList.add('blue');
+    }
+</script>
+<!-- <script>
+  function main()
+  {
+    // Set clientSideID to your LaunchDarkly client-side ID
+    const clientSideID = '6666d71ce6d03f0fdbe627ce';
+
+    // Set flagKey to the feature flag key you want to evaluate
+    const flagKey = 'blue-background';
+
+    // Set up the evaluation context. This context should appear on your
+    // LaunchDarkly contexts dashboard soon after you run the demo.
+    const context = {
+      kind: 'user',
+      key: 'example-context-key',
+      name: 'Sandy'
+    };
+
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+    div.appendChild(document.createTextNode('Initializing...'));
+
+    const ldclient = LDClient.initialize(clientSideID, context);
+
+    function render() {
+      const flagValue = ldclient.variation(flagKey, false);
+      const label = 'The ' + flagKey + ' feature flag evaluates to ' + flagValue + '.';
+      document.body.style.background = flagValue ? '#00844B' : '#373841';
+      div.replaceChild(document.createTextNode(label), div.firstChild);
+    }
+
+    ldclient.on('initialized', () => {
+      div.replaceChild(document.createTextNode('SDK successfully initialized!'), div.firstChild);
+    });
+    ldclient.on('failed', () => {
+      div.replaceChild(document.createTextNode('SDK failed to initialize'), div.firstChild);
+    });
+    ldclient.on('ready', render);
+    ldclient.on('change', render);
+
+  }
+  main();
+  </script> -->
+</body>
+
+</html>
